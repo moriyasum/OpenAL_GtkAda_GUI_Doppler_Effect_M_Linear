@@ -44,7 +44,7 @@ Source Input level and Listener Output level are adjustable independently
 
 **Detail**
 
-https://n7sd.com/ada1-2/openal_gtkada_gui_doppler_effect_1_linear/
+https://n7sd.com/openal_gtkada_gui_doppler_effect_10xsource_linear/
 
 
 
