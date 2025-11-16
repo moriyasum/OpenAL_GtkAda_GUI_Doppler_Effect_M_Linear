@@ -2,6 +2,7 @@
 GUI GtkAda application that demonstrates the Doppler effect using OpenAL-Ada with Multi_Source (10x)
 
 **Project: gui_doppler_linear_m**
+
 **Multi-Source (10x) Train Doppler Simulator**
 
 To accurately reproduce the sound of a passing train, you can configure up to 10 sources along with the length of each source. 
