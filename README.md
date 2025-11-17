@@ -5,8 +5,11 @@ GUI GtkAda application that demonstrates the Doppler effect using OpenAL-Ada wit
 
 **Multi-Source (10x) Train Doppler Simulator**
 
-To accurately reproduce the sound of a passing train, you can configure up to 10 sources along with the length of each source. 
-Each source is positioned at equal intervals along the train according to the specified settings
+There is a known issue in OpenAL-Ada where the audio output level becomes abnormal when a source passes directly in front of the listener. Because of this, it is difficult to implement a proper workaround when using only a single source, especially for long objects such as trains.
+
+As a solution, it is more effective to run the demo with multiple sources arranged in sequence.
+This demo supports using up to ten sources simultaneously.
+
 
 <img width="998" height="1114" alt="Screenshot from 2025-11-16 15-21-14" src="https://github.com/user-attachments/assets/de4241a5-ef61-4a21-bb91-184131c7cb61" />
 
