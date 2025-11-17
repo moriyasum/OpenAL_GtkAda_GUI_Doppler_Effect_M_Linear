@@ -366,20 +366,11 @@ package body Audio is
 --------------------------------------------------------------------
       OpenAL.Source.Generate_Sources (Sound_Source_Array);  --  1..S_COUNT_MAX
 --
----      for nnn in 1 .. S_Count loop
---
-----      Sound_Source := Sound_Source_Array (1);  --  ##########
-
----         Sound_Source := Sound_Source_Array (nnn);
-
-      --      if OpenAL.Source.Is_Valid (Sound_Source_Array (1)) = True then
-
---
       OpenAL_Errort := OpenAL.Error.Get_Error;
       Put_Line ("Generate_Sources Status = "
                 & OpenAL.Error.Error_t'Image (OpenAL_Errort));
 --
-      if OpenAL.Source.Is_Valid (Sound_Source_Array (S_COUNT_MAX)) = True then  --  ###########################################################################
+      if OpenAL.Source.Is_Valid (Sound_Source_Array (S_COUNT_MAX)) = True then
          Put_Line ("Source Is_Valid=True GOOD");
       else
 --            Close_Device (Device);
@@ -403,17 +394,12 @@ package body Audio is
 ----------------------------------------------------------------------
       for nnn in 1 .. S_COUNT_MAX loop
          OpenAL.Source.Set_Current_Buffer
-           (Sound_Source_Array (nnn),          --  ###############
+           (Sound_Source_Array (nnn),
             WAV_Buffers (nnn));
       end loop;
 --
 --
---  Rolloff Factor, emphasizes approaching and receding
-      for nnn in 1 .. S_COUNT_MAX loop
-         OpenAL.Source.Set_Rolloff_Factor_Float --  Default=1.0,Sensitive >1.0 ###############
-           (Sound_Source_Array (nnn), Float_t (ROLLOFF_FACTOR));
-      end loop;
-
+--
 ---------------------------
    --  Set OpenAL Doppler Effect Parameters
 ---------------------------
@@ -423,6 +409,13 @@ package body Audio is
 --  Doppler Factor
       OpenAL.Global.Set_Doppler_Factor (1.0);   --  Default Doppler factor
 
+--  Rolloff Factor, emphasizes approaching and receding
+      for nnn in 1 .. S_COUNT_MAX loop
+         OpenAL.Source.Set_Rolloff_Factor_Float --  Default=1.0,Sensitive >1.0
+           (Sound_Source_Array (nnn), Float_t (ROLLOFF_FACTOR));
+      end loop;
+--
+--
 --  Volume Control
       Audio_Set_Volumes;
 
@@ -436,11 +429,6 @@ package body Audio is
       OpenAL.Listener.Set_Orientation_Float
         (Listener_Orientation_Forward, Listener_Orientation_Up);
 --
-
-      OpenAL.Source.Set_Rolloff_Factor_Float
-        (Sound_Source_Array (1), 1.0);    --  Default=1.0,  Sensitive >1.0  --  ############
-      OpenAL.Global.Set_Doppler_Factor (1.0); --  Default Doppler factor
-   --
    end Audio_Initialize_Open;
 --
 --
@@ -466,15 +454,15 @@ package body Audio is
 --------------------------------------------------------------
       for nnn in 1 .. S_COUNT_MAX loop
          OpenAL.Source.Set_Looping
-           (Source => Sound_Source_Array (nnn),  --  ##############
+           (Source => Sound_Source_Array (nnn),
             Looping => True);
       end loop;
       Put_Line ("Source is set looping");
 --
       for nnn in 1 .. Natural (S_Count) loop
-         OpenAL.Source.Play (Sound_Source_Array (nnn));  --  ##############
+         OpenAL.Source.Play (Sound_Source_Array (nnn));
       end loop;
-      Put_Line ("Play(Sound_Source_Array (nnn))");  --  ###########
+      Put_Line ("Play(Sound_Source_Array (nnn))");
    end Audio_Start;
 --
 --
@@ -540,7 +528,7 @@ package body Audio is
 
       end if;
       OpenAL.Source.Set_Position_Float
-        (Sound_Source_Array (1), SetPosF, 0.0, 0.0);  --  ##############
+        (Sound_Source_Array (1), SetPosF, 0.0, 0.0);
 
       OpenAL.Listener.Set_Position_Float (0.0, 0.0, Float_t (-L_Z_M));
 --
@@ -551,10 +539,10 @@ package body Audio is
          if not Previous_Dead_Zone then
          --  Moved into Dead zone
             OpenAL.Source.Set_Velocity_Float
-              (Sound_Source_Array (1), 0.0, 0.0, 0.0);  --  ##############
+              (Sound_Source_Array (1), 0.0, 0.0, 0.0);
          --  Adjust Gain UP 30% when Dead zone
          --  Check previous, change some setting if it's new
-
+--
 --
       -------------------------------------
       --  Gain Factor: The Deadzone Factor varies depending on Z (offset)
@@ -582,7 +570,7 @@ package body Audio is
                end if;
                OpenAL.Source.Set_Gain
                  (Sound_Source_Array (1),
-                  Float_t (Float (S_Gain_Linear) * Gain));  --  ############
+                  Float_t (Float (S_Gain_Linear) * Gain));
                Put_Line
                  ("Deadzone Gain Factor=" &
                     Float'Image (Float (S_Gain_Linear) * Gain));
@@ -597,15 +585,15 @@ package body Audio is
             SetVelF := -SetVelF;
          end if;
          OpenAL.Source.Set_Velocity_Float
-           (Sound_Source_Array (1), SetVelF, 0.0, 0.0);  --  ##########
+           (Sound_Source_Array (1), SetVelF, 0.0, 0.0);
 
          if Previous_Dead_Zone then
          --  Just after leaving the Dead Zone, return to the normal output
             OpenAL.Source.Set_Gain
-              (Sound_Source_Array (1), Float_t (S_Gain_Linear)); --  ##########
+              (Sound_Source_Array (1), Float_t (S_Gain_Linear));
 
             OpenAL.Source.Set_Rolloff_Factor_Float
-              (Sound_Source_Array (1), 1.0);    --  Default=1.0,  Sensitive >1.0  --  ############
+              (Sound_Source_Array (1), 1.0);    --  Default=1.0,Sensitive >1.0
             OpenAL.Global.Set_Doppler_Factor (1.0); --  Default Doppler factor
          end if;
 --
@@ -622,10 +610,10 @@ package body Audio is
    --  Set Source Positions
       for nnn in 1 .. Natural (S_Count) loop
          SetPosF := OpenAL.Types.Float_t (S_X_Pos_M - L_X_M + S_X_Len_M / 2.0
-           - S_X_Len_M / (S_Count - 1.0) * Float (nnn - 1));
+                    - S_X_Len_M / (S_Count - 1.0) * Float (nnn - 1));
 
          OpenAL.Source.Set_Position_Float
-           (Sound_Source_Array (nnn), SetPosF, 0.0, 0.0);  --  ##############
+           (Sound_Source_Array (nnn), SetPosF, 0.0, 0.0);
       end loop;
 
    --  Set Listener Position
@@ -639,9 +627,9 @@ package body Audio is
 
       for nnn in 1 .. Natural (S_Count) loop
          OpenAL.Source.Set_Velocity_Float
-           (Sound_Source_Array (nnn), SetVelF, 0.0, 0.0);  --  ##########
-         OpenAL.Source.Set_Gain
-           (Sound_Source_Array (nnn), Float_t (S_Gain_Linear));
+           (Sound_Source_Array (nnn), SetVelF, 0.0, 0.0);
+--         OpenAL.Source.Set_Gain
+--           (Sound_Source_Array (nnn), Float_t (S_Gain_Linear));
       end loop;
    end Audio_Playing_Parameters_m;
 --
@@ -653,10 +641,10 @@ package body Audio is
    begin
       for nnn in 1 .. S_COUNT_MAX loop
          OpenAL.Source.Set_Gain
-           (Sound_Source_Array (nnn), Float_t (S_Gain_Linear));  --  ####################
+           (Sound_Source_Array (nnn), Float_t (S_Gain_Linear));
       end loop;
 --
-      OpenAL.Listener.Set_Gain (Float_t (L_Gain_Linear));  --  $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+      OpenAL.Listener.Set_Gain (Float_t (L_Gain_Linear));
    end Audio_Set_Volumes;
 --
 --
@@ -675,10 +663,10 @@ package body Audio is
 
       --  2. Unqueue Buffers
       for nnn in 1 .. S_COUNT_MAX loop
-         OpenAL.Source.Get_Buffers_Queued (Source => Sound_Source_Array (nnn),  --  ##########################
+         OpenAL.Source.Get_Buffers_Queued (Source => Sound_Source_Array (nnn),
                                            Buffers => ProcessedNr);
          if ProcessedNr /= 0 then
-            OpenAL.Source.Unqueue_Buffers (Source  => Sound_Source_Array (nnn),  --  #######################
+            OpenAL.Source.Unqueue_Buffers (Source  => Sound_Source_Array (nnn),
                                      Buffers => WAV_Buffers);
          end if;
       end loop;
