@@ -90,7 +90,9 @@ package body Gui is
       for nnn in 1 .. Natural (S_Count) loop
          Cairo.Arc
            (Cr => Cr,
-            Xc => Glib.Gdouble (S_X_Pos_Pix + S_X_Len_Pix / 2.0 - S_X_Len_Pix / (S_Count - 1.0) * Float (nnn - 1)),
+            Xc => Glib.Gdouble
+              (S_X_Pos_Pix + S_X_Len_Pix / 2.0 -
+                   S_X_Len_Pix / (S_Count - 1.0) * Float (nnn - 1)),
             Yc => Glib.Gdouble (S_Y_Pix),
             Radius => Glib.Gdouble (S_Radius / 2.0),
             Angle1 => 0.0,

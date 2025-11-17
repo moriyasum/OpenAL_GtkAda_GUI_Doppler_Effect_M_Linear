@@ -95,12 +95,10 @@ package body Process is
       Put_Line ("Set Audio X : SetPosF [m]=" &
                   OpenAL.Types.Float_t'Image (SetPosF));
 --
-
-      OpenAL.Source.Get_Gain (Sound_Source_Array (1), S_Gain);  --  ################
+      OpenAL.Source.Get_Gain (Sound_Source_Array (1), S_Gain); --  only #1
       OpenAL.Listener.Get_Gain (L_Gain);
       Put_Line ("Source Linear_Gain=" & Float_t'Image (S_Gain) &
                 ",   Listener Linear_Gain=" & Float_t'Image (L_Gain));
-
 --
    end On_Button_Pause_Cb;
 --
