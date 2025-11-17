@@ -57,3 +57,17 @@ PC1: OMEN 17-ck2095cl, i9-13900HX, RTX-4080
 PC2: HP ENVY 17t-S100, i7-6700HQ, 16GB, Intel HD Graphics 530
 
 Audio source file: Mono, 44.1kHz, 16bit, WAV file
+
+
+
+**NOTE**
+
+1, Avoid pressing “Pause” while the source is passing directly in front of the listener. 
+
+If you press “Pause–Start” at that moment, the audio between the sources will become misaligned because the playback speeds of the left and right channels differ.
+
+
+
+2, If you change the “Source Count” setting after pressing “Start”, be sure to restart the demo by using “Stop–Start.” 
+
+This prevents complications in synchronization between sources.
