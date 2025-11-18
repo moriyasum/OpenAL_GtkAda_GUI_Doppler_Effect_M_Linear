@@ -15,14 +15,14 @@ This demo supports using up to ten sources simultaneously.
 
 
 
-**Tone Audio 10x Source Doppler Effect Demo**
+**Tone Audio Doppler Effect Demo with 10 Sources**
 
 [GUI_Linear_M_10S_Tone.webm](https://github.com/user-attachments/assets/e23ed5bf-7409-4617-b700-3decf817ceda)
 
 
 
 
-**Passing Train Audio 10x Source Doppler Effect Demo**
+**Passing Train Doppler Effect Demo with 10 Sources**
 
 [GUI_Linear_M_10S_Train.webm](https://github.com/user-attachments/assets/48a915fe-e81e-4035-90e6-bb8b8911f0a8)
 
