@@ -1,9 +1,9 @@
 # OpenAL_GtkAda_GUI_Doppler_Effect_M_Linear
-GUI GtkAda application that demonstrates the Doppler effect using OpenAL-Ada with Multi_Source (10x)
+GUI GtkAda application that demonstrates the Doppler effect using OpenAL-Ada with Multi_Source (10 Sources)
 
 **Project: gui_doppler_linear_m**
 
-**Multi-Source (10x) Train Doppler Simulator**
+**Multi-Source (10 Sources) Train Doppler Simulator**
 
 There is a known issue in OpenAL-Ada where the audio output level becomes abnormal when a source passes directly in front of the listener. Because of this, it is difficult to implement a proper workaround when using only a single source, especially for long objects such as trains.
 
