@@ -13,19 +13,20 @@ This demo supports using up to ten sources simultaneously.
 
 <img width="998" height="1114" alt="Screenshot from 2025-11-16 15-21-14" src="https://github.com/user-attachments/assets/de4241a5-ef61-4a21-bb91-184131c7cb61" />
 
-
+<br><br>
 
 **Tone Audio Doppler Effect Demo with 10 Sources**
 
 [GUI_Linear_M_10S_Tone.webm](https://github.com/user-attachments/assets/e23ed5bf-7409-4617-b700-3decf817ceda)
 
 
-
+<br><br>
 
 **Passing Train Doppler Effect Demo with 10 Sources**
 
 [GUI_Linear_M_10S_Train.webm](https://github.com/user-attachments/assets/48a915fe-e81e-4035-90e6-bb8b8911f0a8)
 
+<br><br>
 
 **Additional Features**
 
@@ -43,13 +44,13 @@ Set number of Audio Source, up to 10, located on the train
 
 Source Input level and Listener Output level are adjustable independently
 
-
+<br><br>
 
 **Detail**
 
 https://n7sd.com/openal_gtkada_gui_doppler_effect_10xsource_linear/
 
-
+<br><br>
 
 **Tested environment:**
 
@@ -61,7 +62,7 @@ PC2: HP ENVY 17t-S100, i7-6700HQ, 16GB, Intel HD Graphics 530
 
 Audio source file: Mono, 44.1kHz, 16bit, WAV file
 
-
+<br><br>
 
 **NOTE**
 
