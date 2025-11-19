@@ -85,20 +85,32 @@ package body Gui is
          Glib.Gdouble (S_Radius * 2.0));                       --  Height
       Cairo.Fill (Cr);
 
-      --  Draw Souce markers
+            --  Draw Souce markers
       Cairo.Set_Source_RGB (Cr, 0.0, 1.0, 0.0);
-      for nnn in 1 .. Natural (S_Count) loop
+      if S_Count = 1.0 then   --  To avoid 0 division
          Cairo.Arc
            (Cr => Cr,
             Xc => Glib.Gdouble
-              (S_X_Pos_Pix + S_X_Len_Pix / 2.0 -
-                   S_X_Len_Pix / (S_Count - 1.0) * Float (nnn - 1)),
+              (S_X_Pos_Pix),
             Yc => Glib.Gdouble (S_Y_Pix),
             Radius => Glib.Gdouble (S_Radius / 2.0),
             Angle1 => 0.0,
             Angle2 => Glib.Gdouble (2.0 * Ada.Numerics.Pi));
-      end loop;
+      else
+         for nnn in 1 .. Natural (S_Count) loop
+            Cairo.Arc
+              (Cr => Cr,
+               Xc => Glib.Gdouble
+                 (S_X_Pos_Pix + S_X_Len_Pix / 2.0 -
+                      S_X_Len_Pix / (S_Count - 1.0) * Float (nnn - 1)),
+               Yc => Glib.Gdouble (S_Y_Pix),
+               Radius => Glib.Gdouble (S_Radius / 2.0),
+               Angle1 => 0.0,
+               Angle2 => Glib.Gdouble (2.0 * Ada.Numerics.Pi));
+         end loop;
+      end if;
       Cairo.Fill (Cr);
+--
 --
 ------  TEXT  -----------------
 --  Set Font
