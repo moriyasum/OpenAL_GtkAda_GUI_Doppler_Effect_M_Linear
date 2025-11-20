@@ -72,7 +72,17 @@ Audio source file: Mono, 44.1kHz, 16bit, WAV file
 If you press “Pause–Start” at that moment, the audio between the sources will become misaligned because the playback speeds of the left and right channels differ.
 
 
-
 2, If you change the “Source Count” setting after pressing “Start”, be sure to restart the demo by using “Stop–Start.” 
 
 This prevents complications in synchronization between sources.
+
+
+3, Playback When Using a Long Audio Source
+
+The demo uses a short WAV file that is looped during playback.
+
+When the train reaches either end and reverses direction, the audio is not synchronized between sources.
+
+To keep the audio playback in sync, the demo issues a Source.Stop and Source.Play at each end.
+
+Because of this, even if you use a long audio file, only the portion used during the first one-way trip will be played.
