@@ -436,17 +436,17 @@ package body Process is
             S_X_Dist_M_Intr :=
             Float (T_Intr_Period) / 1000.0 * S_X_Speed * 1000.0 / 3600.0;
 
-            if Progress < 1.0  then
+            if Progress < 1.0  then  --  Regular Rightward state
 
                S_X_Pos_M := S_X_Pos_M + S_X_Dist_M_Intr;
-
                Progress := S_X_Pos_M / S_X_Dist_M;
-
                S_X_Pos_Pix := Progress * S_X_Dist_Pix + S_X_Space;
 
             else   --  Progress >= 1,0 Ritht End
                if Current_Radio_Selected = Repeating then
                   Gui_Initialize_Right_End;
+                  Audio_Stop;
+                  Audio_Start;
                   Process_State := Busy_Left;
                   Source_Direction := Left;
                else  --  Stopped at Right End
@@ -468,18 +468,18 @@ package body Process is
             S_X_Dist_M_Intr :=
             Float (T_Intr_Period) / 1000.0 * S_X_Speed * 1000.0 / 3600.0;
 
-            if Progress < 1.0  then
+            if Progress < 1.0  then  --  Regular Leftward state
 
                S_X_Pos_M := S_X_Pos_M - S_X_Dist_M_Intr;
-
                Progress := (S_X_Dist_M - S_X_Pos_M) / S_X_Dist_M;
-
                S_X_Pos_Pix :=
-                 S_X_Dist_Pix + S_X_Space - (Progress * S_X_Dist_Pix);
+                  S_X_Dist_Pix + S_X_Space - (Progress * S_X_Dist_Pix);
 
             else   --  Progress >= 1,0 Left End
                if Current_Radio_Selected = Repeating then
                   Gui_Initialize_Left_End;
+                  Audio_Stop;
+                  Audio_Start;
                   Process_State := Busy_Right;
                   Source_Direction := Right;
                else     --  Stopped at Left End

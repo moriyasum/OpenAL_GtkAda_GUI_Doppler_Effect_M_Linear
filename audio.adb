@@ -371,11 +371,11 @@ package body Audio is
                 & OpenAL.Error.Error_t'Image (OpenAL_Errort));
 --
       if OpenAL.Source.Is_Valid (Sound_Source_Array (S_COUNT_MAX)) = True then
-         Put_Line ("Source Is_Valid=True GOOD");
+         Put_Line ("Source_Is_Valid=True GOOD");
       else
 --            Close_Device (Device);
 --            Destroy_Context (Context);
-         Put_Line ("Source Is_Valid=False BAD QUIT Initialize");
+         Put_Line ("Source_Is_Valid=False BAD QUIT Initialize");
          Audio_End;
          return;
       end if;
@@ -398,6 +398,19 @@ package body Audio is
             WAV_Buffers (nnn));
       end loop;
 --
+--
+--------------------------------------------------------------
+--  Set_Looping
+--  It can repeat the source sound
+--  The second parameter is "Looping", should be True or False
+--  It is True when repeating
+--------------------------------------------------------------
+      for nnn in 1 .. S_COUNT_MAX loop
+         OpenAL.Source.Set_Looping
+           (Source => Sound_Source_Array (nnn),
+            Looping => True);
+      end loop;
+      Put_Line ("Source is set looping");
 --
 --
 ---------------------------
@@ -446,23 +459,12 @@ package body Audio is
 --------------------------------------------------------------------
    procedure Audio_Start is
    begin
---------------------------------------------------------------
---  Set_Looping
---  It can repeat the source sound
---  The second parameter is "Looping", should be True or False
---  It is True when repeating
---------------------------------------------------------------
-      for nnn in 1 .. S_COUNT_MAX loop
-         OpenAL.Source.Set_Looping
-           (Source => Sound_Source_Array (nnn),
-            Looping => True);
-      end loop;
-      Put_Line ("Source is set looping");
+
 --
       for nnn in 1 .. Natural (S_Count) loop
          OpenAL.Source.Play (Sound_Source_Array (nnn));
       end loop;
-      Put_Line ("Play(Sound_Source_Array (nnn))");
+--      Put_Line ("Play(Sound_Source_Array (nnn))");
    end Audio_Start;
 --
 --
